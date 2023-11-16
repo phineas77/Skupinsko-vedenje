@@ -209,7 +209,7 @@
 \makeatletter
 \fancypagestyle{firststyle}{
 %   \fancyfoot[R]{\footerfont \teza@program\hspace{7pt}|\hspace{7pt}\textbf{FRI}teza\hspace{7pt}|\hspace{7pt}vol. \teza@vol\hspace{7pt}|\hspace{7pt}no. \teza@no\hspace{7pt}|\hspace{7pt}\textbf{\thepage\textendash\pageref{LastPage}}}
-   \fancyfoot[R]{\footerfont \teza@program\hspace{7pt}|\hspace{7pt}\color{P1797}\textbf{FRI}\color{color0}teza\hspace{7pt}|\hspace{7pt}\teza@vol\hspace{7pt}|\hspace{7pt}\teza@no\hspace{7pt}|\hspace{7pt}\textbf{\thepage\textendash\pageref{LastPage}}}
+   \fancyfoot[R]{\footerfont \teza@program\hspace{7pt}|\hspace{7pt}\teza@vol\hspace{7pt}|\hspace{7pt}\teza@no\hspace{7pt}|\hspace{7pt}\textbf{\thepage\textendash\pageref{LastPage}}}
    \fancyfoot[L]{\hspace*{-2.25in}\footerfont\@ifundefined{@doi}{}{\@doi}}
 }
 \makeatother
@@ -224,7 +224,7 @@
 \makeatletter
 \fancyfoot[LE]{\hspace*{-2.25in}\footerfont\textbf{\thepage}\hspace{7pt}|\hspace{7pt}\@ifundefined{@doi}{}{\@doi}}
 %\fancyfoot[RO]{\footerfont \teza@program\hspace{7pt}|\hspace{7pt}\textbf{FRI}teza\hspace{7pt}|\hspace{7pt}vol. \teza@vol\hspace{7pt}|\hspace{7pt}no. \teza@no\hspace{7pt}|\hspace{7pt}\textbf{\thepage}}
-\fancyfoot[RO]{\footerfont \teza@program\hspace{7pt}|\hspace{7pt}\color{P1797}\textbf{FRI}\color{color0}teza\hspace{7pt}|\hspace{7pt}\teza@vol\hspace{7pt}|\hspace{7pt}\teza@no\hspace{7pt}|\hspace{7pt}\textbf{\thepage}}
+\fancyfoot[RO]{\footerfont \teza@program\hspace{7pt}|\hspace{7pt}\teza@vol\hspace{7pt}|\hspace{7pt}\teza@no\hspace{7pt}|\hspace{7pt}\textbf{\thepage}}
 \fancyfoot[RE,LO]{\hspace*{-2.25in}\footerfont\@ifundefined{@leadauthor}{}{\@leadauthor}\ifnum \value{authors} > 1\hspace{5pt}\emph{\@etal}\fi}
 
 % Use footer routine for line numbers
@@ -371,7 +371,7 @@ THE ABSTRACT\vskip12pt}\let\go\relax\fi
 	\begin{minipage}{2in}
 	\@ifundefined{@dates}{}{{\sffamily\footnotesize{\@dates}}\par
 	\vskip6pt}
-	{\sffamily\footnotesize{Iztok Lebar Bajec | izredni professor | mentor}}\par
+	{\sffamily\footnotesize{Iztok Lebar Bajec | professor | mentor}}\par
 	%{\sffamily\footnotesize{\textbf{\textsuperscript{a}Mentor:} izr. prof. dr. Iztok Lebar Bajec}}\par
 	%{\sffamily\footnotesize{\textsuperscript{b}\textbf{Somentor:} as. Jure Demšar}}\par 
 	\vskip24pt
@@ -403,7 +403,7 @@ THE ABSTRACT\vskip12pt}\let\go\relax\fi
 \path (current page.south west) ++(38.5pt,32pt+25pt+2pt) node[anchor=south west] {\begin{minipage}{2in}
 	{\sffamily \@significancestatement}
 	\end{minipage}};
-\node[anchor=north west] at ([shift={(38.5pt,-32pt-25pt)}]current page.north west) {\includegraphics{FRIteza_logo.pdf}};
+\node[anchor=north west] at ([shift={(38.5pt,-32pt-25pt)}]current page.north west) {\includegraphics{FRI_logo.png}};
 %\path[fill=P1797] ([shift={(38.5pt,-32pt-25pt)}]current page.north west) rectangle ([shift={(38.5pt+13mm,-32pt-25pt-13mm)}]current page.north west);
 %\node[white,anchor=east] at ([shift={(38.5pt+13mm+1.4mm,-32pt-25pt-13mm/2)}]current page.north west) {\sffamily\bfseries FRI};
 %\node[anchor=west] at ([shift={(38.5pt+13mm-1.4mm,-32pt-25pt-13mm/2)}]current page.north west) {\sffamily teza};

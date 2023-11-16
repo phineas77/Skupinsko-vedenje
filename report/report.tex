@@ -1,14 +1,8 @@
 \documentclass[9pt]{pnas-new}
-% Use the lineno option to display guideline numbers if required.
-% Note that the use of elements such as single-column equations
-% may affect the guideline number alignment. 
 
-\RequirePackage[english]{babel} % when writing in english
+\RequirePackage[english]{babel}
 
-\templatetype{pnasresearcharticle} % Choose template 
-% {pnasresearcharticle} = Template for a two-column research article
-% {pnasmathematics} = Template for a one-column mathematics article
-% {pnasinvited} = Template for a PNAS invited submission
+\templatetype{pnasresearcharticle}
 
 \newcommand{\set}[1]{\ensuremath{\mathbf{#1}}}
 \renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
@@ -20,44 +14,32 @@
 
 \title{Reimplementing the FRIsheeping herding algorithm using fuzzy logic}
 
-% Use letters for affiliations, numbers to show equal authorship (if applicable), and to indicate the corresponding author
-\author{Noah Novšak}
 \author{Veljko Dudić}
+\author{Noah Novšak}
 \author{Petra Kuralt}
 \author{Timotej Košir}
 
 \affil{Collective behavior course research seminar report} 
 
-% Please give the surname of the lead author for the running footer
-% \leadauthor{}
-
 \selectlanguage{english}
 
-% Please add here a significance statement to explain the relevance of your work
-\significancestatement{A herding algorithm that uses fuzzy logic}{Lorem ipsum.}{keywords}
+\significancestatement{A herding algorithm that uses fuzzy logic}{Summary of Findings: Recapitulate key findings and their significance.}{fuzzy logic | herding algorithm}
 
-% Please include the corresponding author, author contribution, and author declaration information
-%\authorcontributions{Please provide details of author contributions here.}
-%\authordeclaration{Please declare any conflict of interest here.}
-%\equalauthors{\textsuperscript{1}A.O.(Author One) and A.T. (Author Two) contributed equally to this work (remove if not applicable).}
-%\correspondingauthor{\textsuperscript{2}To whom correspondence should be addressed. E-mail: author.two\@email.com}
+\equalauthors{\textsuperscript{1}N.N.(Noah Novšak), V.D. (Veljko Dudić), P.K. (Petra Kuralt), and T.K. (Timotej Košir) contributed equally to this work.}
 
-% Keywords are not mandatory, but authors are strongly encouraged to provide them. If provided, please include two to five keywords, separated by the pipe symbol, e.g.:
-\keywords{keywords} 
+\keywords{fuzzy logic | herding algorithm} 
 
 \begin{abstract}
-Lorem ipsum.
+Concisely summarize the research objectives, methodology, key findings, and implications.
 \end{abstract}
 
 \dates{\textbf{\today}}
 \program{BM-RI}
-\vol{2018/19}
-\no{CB:G1} % group ID
-%\fraca{FRIteza/201516.130}
+\vol{2023/24}
+\no{CB:G} % group ID
 
 \begin{document}
 
-% Optional adjustment to line up main text (after abstract) of the first page with line numbers when using both lineno and twocolumn options.
 % You should only change this length when you've finalized the article contents.
 \verticaladjustment{-2pt}
 
@@ -66,32 +48,46 @@ Lorem ipsum.
 \ifthenelse{\boolean{shortarticle}}{\ifthenelse{\boolean{singlecolumn}}{\abscontentformatted}{\abscontent}}{}
 
 % If your first paragraph (i.e., with the \dropcap) contains a list environment (quote, quotation, theorem, definition, enumerate, itemize...), the line after the list may have some extra indentation. If this is the case, add \parshape=0 to the end of the list environment.
-\dropcap{I}ntroduction
-\cite{shepherdingalgorithm}
-\cite{herdingalgorithm}
-\cite{fuzzymodel}
-\cite{flocktransport}
-\cite{crowdmodelling}
+\dropcap{I}ntroduction: Briefly introduce the background, i.e., the concept of herding algorithms and their applications.
 
-\section*{Methods}
+Motivation: Discuss the need for reimplementing herding algorithms with fuzzy logic.
 
-\subsection*{Some method}
+Research Question: Formulate the main research question and objectives.
 
-\subsection*{Some other method}
+\subsection*{Literature review}
+Overview of Herding Algorithms: Summarize existing algorithms, their strengths, and limitations. \cite{shepherdingalgorithm} \cite{optimalshepherding}
 
-\subsection*{Implementation}
+Fuzzy Logic in Algorithms: Explore previous studies incorporating fuzzy logic into algorithms. \cite{fuzzylogic} \cite{modellingcrowd}
+
+\section*{Methodology}
+Selection of Herding Algorithm: Justify the choice of the specific herding algorithm for implementation. \cite{behaviorbased}
+
+Integration of Fuzzy Logic: Describe the process of incorporating fuzzy logic into the chosen algorithm.
+
+Data Collection: Detail the environment used for testing and evaluating the reimplemented algorithm.
+
+Performance Metrics: Specify the metrics used to assess the algorithm's performance.
 
 \section*{Results}
+Implementation Details: Present the technical aspects of the reimplemented herding algorithm with fuzzy logic.
+
+Comparative Analysis: Compare the new algorithm's performance with the original version and other relevant benchmarks.
+
+Discussion of Results: Interpret the findings and discuss any unexpected outcomes.
 
 \section*{Discussion}
+Implications: Explore the potential applications and benefits of the reimplemented algorithm.
+
+Limitations: Discuss any limitations of the study and potential areas for future research.
+
+Practical Considerations: Address practical aspects of implementing the algorithm in real-world scenarios.
 
 \acknow{distribution of labor}
 \showacknow % Display the acknowledgments section
 
-% \pnasbreak splits and balances the columns before the references.
 % If you see unexpected formatting errors, try commenting out this line
 % as it can run into problems with floats and footnotes on the final page.
-%\pnasbreak
+% \pnasbreak % Splits and balances the columns before the references.
 
 \begin{multicols}{2}
 \section*{\bibname}
