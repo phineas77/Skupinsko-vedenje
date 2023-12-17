@@ -1,15 +1,15 @@
 # Using Fuzzy Logic to reimplement the FRIsheeping herding algorithm
 
-### Team Members:
+Project report for Collective Behavior course at Faculty of Computer and Information Science at the University of Ljubljana.
 
-- Veljko Dudić
-  - GitHub: [@phineas77](https://github.com/phineas77)
-- Noah Novšak
-  - GitHub: [@noahnovsak](https://github.com/noahnovsak)
-- Petra Kuralt
-  - GitHub: [@FyFean](https://github.com/FyFean)
-- Timotej Košir
-  - GitHub: [@timotejkosir](https://github.com/timotejkosir)
+Implementation available [here](https://github.com/FyFean/frisheeping).
+
+### Authors:
+
+- Veljko Dudić [@phineas77](https://github.com/phineas77)
+- Noah Novšak [@noahnovsak](https://github.com/noahnovsak)
+- Petra Kuralt [@FyFean](https://github.com/FyFean)
+- Timotej Košir [@timotejkosir](https://github.com/timotejkosir)
 
 ### Overview
 
@@ -25,10 +25,14 @@ Our initial goal also assumes searching for additional articles to deepen our th
 
 ### Milestones
 
-- [First Report](https://github.com/phineas77/Skupinsko-vedenje/milestone/1)
+We will be keeping track of our work using Github [milestones](https://github.com/phineas77/Skupinsko-vedenje/milestones). Each includes a list of tasks we plan to accomplish, more details accessible below:
+
+- ~~[First Report](https://github.com/phineas77/Skupinsko-vedenje/milestone/1)~~
 
 - [Second Report](https://github.com/phineas77/Skupinsko-vedenje/milestone/2)
 
 - [Final Report](https://github.com/phineas77/Skupinsko-vedenje/milestone/3)
+
+### 
 
 
