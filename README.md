@@ -1,10 +1,10 @@
 # Using Fuzzy Logic to reimplement the FRIsheeping herding algorithm
 Project report for Collective Behavior course at Faculty of Computer and Information Science at the University of Ljubljana.
 
-Implementation is a forked repository of FRIsheeping, available [here](https://github.com/FyFean/frisheeping/).
+### Code
+Implementation is a forked repository of FRIsheeping, available [here](https://github.com/FyFean/frisheeping/). To run the simulation, you have to clone the repository using `git clone https://github.com/FyFean/frisheeping/`. After that, you can import it to Unity Hub via "Add" button. The project can be run using the "Play" button inside Unity Editor. Version of the Unity is `2022.3.13f`.
 
-
-### Team Members:
+### Team Members
 
 - Veljko Dudić
   - GitHub: [@phineas77](https://github.com/phineas77)
@@ -17,7 +17,7 @@ Implementation is a forked repository of FRIsheeping, available [here](https://g
 
 ### Overview
 
-In this project, we implement the herding algorithm using fuzzy logic for project FRIsheeping. We also extend already existing model by adding fuzzy logic.
+In this project, we enrichen the FRIsheeping project with an implement of the herding algorithm using fuzzy logic. We reuse part of the code to improve existing model by adding fuzzy logic.
 
 The following articles serve as a strong starting point on herding algorithms; ["Shepherding Heterogeneous Flock with Model-Based Discrimination"](https://arxiv.org/pdf/2210.11055.pdf) and [Optimal Shepherding and Transport of a Flock](https://arxiv.org/pdf/2211.04352.pdf). In addition to the core dynamics of agents and shepherds in herding scenarios, these articles also provide some mathematical background and an overview of possible implementation methods.
 
