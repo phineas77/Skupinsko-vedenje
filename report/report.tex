@@ -7,6 +7,7 @@
 \usepackage{amsmath}
 \usepackage{subfigure}
 \usepackage{float}
+\usepackage{subcaption}
 
 \newcommand{\set}[1]{\ensuremath{\mathbf{#1}}}
 \renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
@@ -27,14 +28,17 @@
 
 \selectlanguage{english}
 
-\significancestatement{A herding algorithm that uses fuzzy logic}{This study explores the integration of fuzzy logic into herding algorithms as an innovative approach to enhance adaptability and nuanced decision-making within simulated group dynamics. Initially, we build upon the Str\"{o}mbom algorithm, implemented in a Unity environment, introducing fuzzy logic to refine the behavior of entities within the herd. Afterward, our investigation extends to the implementation of herding mechanisms using genetic algorithms. This utilization of fuzzy logic and genetic algorithms aims to create a comprehensive and robust framework for simulating herding behavior in dynamic environments.}{fuzzy logic | herding algorithm  | genetic algorithm}
+\significancestatement{A herding algorithm that uses fuzzy logic}{This study explores the integration of fuzzy logic into herding algorithms as an innovative approach to enhance adaptability and nuanced decision-making within simulated group dynamics. Initially, we build upon the Str\"{o}mbom algorithm, implemented in a Unity environment, introducing fuzzy logic to refine the behavior of entities within the herd. Afterward, our investigation extends to implementing a fuzzy inference system grounded in the principles of Boids flocking behavior. This utilization of fuzzy logic and genetic algorithms aims to create a comprehensive and robust framework for simulating herding behavior in dynamic environments.}{fuzzy logic | herding algorithm  | genetic algorithm}
+
+
 
 \equalauthors{\textsuperscript{1}N.N.(Noah Novšak), V.D. (Veljko Dudić), P.K. (Petra Kuralt), and T.K. (Timotej Košir) contributed equally to this work.}
 
 \keywords{fuzzy logic | herding algorithm | genetic algorithm} 
 
 \begin{abstract}
-This study explores the integration of fuzzy logic into herding algorithms as an innovative approach to enhance adaptability and nuanced decision-making within simulated group dynamics. Initially, we build upon the Str\"{o}mbom algorithm, implemented in a Unity environment, introducing fuzzy logic to refine the behavior of entities within the herd. Afterward, our investigation extends to the implementation of herding mechanisms using genetic algorithms. This utilization of fuzzy logic and genetic algorithms aims to create a comprehensive and robust framework for simulating herding behavior in dynamic environments.
+This study explores the integration of fuzzy logic into herding algorithms to enhance adaptability and nuanced decision-making within simulated group dynamics. Initially, we build upon the Str\"{o}mbom algorithm, implemented in a Unity environment, introducing fuzzy logic to refine the herd behavior. Afterward, our investigation extends to herding mechanism implementation using a fuzzy logic inference system grounded in the flocking behaviors of Boids. This fuzzy logic utilization aims to create a comprehensive and robust framework for simulating herding behavior in dynamic environments.
+Overall, the implemented models introduce more variability. However, while they work to some extent, there is still room for further refinement before any practical viability.
 \end{abstract}
 
 \dates{\textbf{\today}}
@@ -53,15 +57,24 @@ This study explores the integration of fuzzy logic into herding algorithms as an
 
 % If your first paragraph (i.e., with the \dropcap) contains a list environment (quote, quotation, theorem, definition, enumerate, itemize...), the line after the list may have some extra indentation. If this is the case, add \parshape=0 to the end of the list environment.
 \dropcap{H}erding algorithms, at their core, strive to model the behavior of a shepherd (sheepdog) endeavoring to control extensive groups of unwilling individuals (sheep).
-Traditional approaches rely on predefined rules to govern the individual behavior of agents within a group, influencing their movements based on factors like proximity and alignment with neighbors~\cite{basicHerding}. While these methods capture the fundamental aspects of collective behavior, their deterministic nature might fall short in handling the inherent uncertainty and imprecision of real-world scenarios. In this context, our approach introduces another dimension to herding algorithms by incorporating fuzzy logic. This enables a more flexible and adaptive decision-making process by allowing degrees of truth between absolute true and false, thus helping the individuals in a group respond more effectively to altering environments.
+Traditional approaches rely on predefined rules to govern the individual behavior of agents within a group, influencing their movements based on factors like proximity and alignment with neighbors~\cite{basicHerding}. While these methods capture the fundamental aspects of collective behavior, their deterministic nature might fall short in handling the inherent uncertainty and imprecision of real-world scenarios. In this context, our approach introduces another dimension to herding algorithms by incorporating fuzzy logic. This enables a more flexible and adaptive decision-making process by allowing degrees of truth between absolute true and false, thus helping the individuals in a group respond more effectively to altering environments.\\
+As a starting point, we take the algorithm proposed by Str\"{o}mbom et al. \cite{strombom}, which has already been implemented by our predecessors in a Unity environment. Str\"{o}mbom's model employs a weighted sum of various forces to determine the sheep's movement. Utilizing the Str\"{o}mbom's model as a foundation, we construct a fuzzy system to emulate the decision-making process, wherein each agent's behavior is determined by incorporating their unique characteristics and individual traits. Lastly, we investigate the feasibility of employing fuzzy logic as an autonomous herding algorithm, aligning with the principles inherent in the Boids flocking model.
 
 
-As a starting point, we take the algorithm proposed by Str\"{o}mbom et al. \cite{strombom}, which has already been implemented by our predecessors in a Unity environment. Str\"{o}mbom's model employs a weighted sum of various forces to determine the sheep's movement. At the same time, the shepherd alternates between \textit{collecting} dispersed sheep and \textit{driving} the group towards a predefined goal.
+% At the same time, the shepherd alternates between \textit{collecting} dispersed sheep and \textit{driving} the group towards a predefined goal.
 
-In this paper, we discuss our approach to reimplementing Str\"{o}mbom's algorithm and its suggested improvements using fuzzy logic. Additionally, we explore the viability of the sheep's learning behavior through a genetic algorithm, whereby sheep incrementally improve their tactics through evolution.
+
+
+% In this paper, we discuss our approach to reimplementing Str\"{o}mbom's algorithm and its suggested improvements using fuzzy logic. Additionally, we explore the viability of the usage of fuzzy logic itself as a herding algorithm.
+%sheep's learning behavior through a genetic algorithm, whereby sheep incrementally improve their tactics through evolution.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\columnwidth]{fig/strombom2.png}
+    \caption{An example of our setup in Unity environment}
+\end{figure}
 
 \section*{Methodology}
-The testing environment consists of an enclosed pasture with a barn at its edge. The $N$ agents (sheep) are randomly placed in the field with a shepherd (sheepdog), aiming to collect and drive all the sheep into the barn within a limited time. Several different algorithms can be selected to govern the behavior of each agent in the simulation.
+The testing environment consists of an enclosed pasture with a barn at its edge. The $N$ sheep are randomly placed in the field with a sheepdog, aiming to collect and drive all the sheep into the barn within a limited time. Several different algorithms can be selected to govern the behavior of each agent in the simulation.
 
 \subsection{Str\"{o}mbom model}
 Agents attempt to move away from the shepherd while staying close to their neighbors. Each agent decides on its next course of action based on the locations of itself, the shepherd $\bar{S}$, and each of its $n$ nearest neighbors $\bar{A}_{i}$. The agents are attracted to their neighbors' center of mass ($LCM$) and repelled from other agents within a boundary distance $r_a$. The shepherd repels them as well if it is closer than $r_s$.
@@ -85,7 +98,7 @@ Combining all these components, the movement vector in each iteration becomes $$
 An entirely separate set of rules governs the shepherd's behavior. It dynamically switches between \textit{collecting} and \textit{driving}, based on the maximum distance of agents from the center of mass (either global $GCM$ or local $LCM$). If all agents are within $r_aN^\frac{2}{3}$, it attempts to position itself behind the flock to push it towards the goal. Alternatively, if any agent is farther than $r_aN^{\frac{2}{3}}$, the shepherd instead selects the most distant agent and herds it back towards the flock. The shepherd's trajectory is thus always directly toward the desired collecting or driving position. Additionally, some noise is added to the shepherd's movement as well.
 
 % \subsection{Improvements to the model}
-% The base algorithm excels when the shepherd possesses global knowledge, and the agents are attracted to the center of mass of at least half of their peers. However, its effectiveness diminishes with limited attraction among nearby agents and employing only local knowledge for the shepherd. Our goal is to enhance performance with local knowledge and reduce the dependence on agent behavior. We propose two essential modifications: avoiding already collected groups and implementing a modified heuristic for selecting the target agent in collection mode.
+% The base algorithm excels when the shepherd possesses global knowledge and the agents are attracted to the center of mass of at least half of their peers. However, its effectiveness diminishes with limited attraction among nearby agents and employing only local knowledge for the shepherd. Our goal is to enhance performance with local knowledge and reduce the dependence on agent behavior. We propose two essential modifications: avoiding already collected groups and implementing a modified heuristic for selecting the target agent in collection mode.
 % \begin{enumerate}
 %     \item \textbf{Avoidance of already collected groups (previous algorithm with angle calculation):}
 %     A modification is introduced to avoid breaking up already collected groups of agents during the herding process. Instead of taking a straight path towards the furthest agent from the center of mass (GCM/LCM), the shepherd follows an arc around the calculated GCM/LCM. This approach ensures a constant distance from the GCM/LCM, preventing unintended group disruptions. However, this adjustment may extend the time it takes for the shepherd to reach the desired collecting position, particularly in scenarios where the shepherd is considerably distant from the GCM/LCM compared to the collecting position.
@@ -102,10 +115,28 @@ An entirely separate set of rules governs the shepherd's behavior. It dynamicall
 % \end{enumerate}
 
 \subsection{Fuzzy logic}
-We defined the existing \textit{crisp} model in the previous section. Now, we will try to describe its \textit{fuzzy} counterpart. Using fuzzy logic may introduce a more nuanced and realistic decision-making process for determining the behavior of each agent.
+We defined the existing sheepherding model in the previous section. Now, we will describe its \textit{fuzzy} counterpart. The first implementation is based on~\cite{fuzzylogic} and builds on top of the Str\"{o}mbom algorithm. We derive new parameters for Str\"{o}mbom from the personality of each agent and assign the Str\"{o}mbom's parameters from defined fuzzy rules. The second implementation strays away from the Str\"{o}mbom algorithm and uses an entirely new fuzzy inference system, where each sheep is using the position, speed, and direction of sheep in a local environment to return a new heading and speed. These values are then directly used for the movement of the given sheep.
 
-As a starting point, we will take the model proposed by "Boids with a fuzzy way of thinking"~\cite{bajec2003boids}. They find the most important aspect of flocking behavior is the alignment function. Then, we will add an additional component to model the shepherd guiding the flock.
-The described model uses three linguistic variables: the relative heading difference $H$ coded by the values $LEFT$, $RIGHT$, and $SAME$~\ref{membership}, the relative speed difference $S$ coded by $SLOWER$, $FASTER$, and $SAME$~\ref{membership}, and the significance $SIG$ of each neighboring agent, coded by $HIGH$ and $LOW$~\ref{membership}.
+\subsection{Fuzzification of the Str\"{o}mbom model using the OCEAN personality framework}
+To fuzzify our initially proposed Str\"{o}mbom model, we use the OCEAN personality framework, generally used to describe people, to individualize the agents~\cite{fuzzylogic}. The Five-Factor personality model categorizes personalities into five contributing factors:
+\begin{enumerate}
+  \item \textbf{Openness (O)} reflects the degree of curiosity and creativity, indicating preferences for novelty and variety.
+  \item \textbf{Conscientiousness (C)} describes the level of organization and care exhibited in collective activities
+  \item \textbf{Extraversion (E)} related to the degree of energy, sociability, and outgoingness.
+  \item \textbf{Agreeableness (A)} represents a tendency to exhibit compassion and cooperation rather than suspicion and antagonism towards others.
+  \item \textbf{Neuroticism (N)} indicates the tendency to experience unpleasant emotions easily, such as anger, anxiety, depression, or vulnerability, and is the opposite of emotional stability.
+\end{enumerate}
+
+With this, we derive new parameters for Str\"{o}mbom from the personality of each agent and assign the parameters from defined fuzzy rules, such as:
+\begin{verbatim}    
+if (Extraversion is POS) and (Agreeableness is POS), then k neighbors HIGH
+if (Adventurousness is POS) then added noise is HIGH
+\end{verbatim}
+Each sheep's personality is based on the OCEAN model but excludes the conscientiousness and neuroticism aspects. The inputs of the fuzzy inference system are the personality of a sheep and the previous Str\"{o}mbom parameters and the outputs are the new Str\"{o}mbom parameters. To prevent our model from returning the same centroids due to the same values of the inputs, we model them by average neighbor sheep distance and average dog distance. Based on the closeness of the dog or sheep, we will slightly change personality by 10\% and previous parameters by up to 50\%. With that, we achieve much more distinct outputs. The percentage for personalities is much smaller since we want sheep to keep their personality as close to the original as possible. The parameters, on the other hand, scale the extent to which the personality in the rule will modify the output and keep it consistent with the previous actions the sheep has taken.
+
+\subsection{Fuzzy herding algorithm based on Boids approach}
+For the second approach, we take the model proposed by "Boids with a fuzzy way of thinking"~\cite{bajec2003boids}. They find the most important aspect of flocking behavior is the alignment function. Then, we will add a component to model the shepherd guiding the flock.
+The described model uses three linguistic variables: the relative heading difference $H$ coded by the values $LEFT$, $RIGHT$, and $SAME$~\ref{fig:heading_membership}, the relative speed difference $S$ coded by $SLOWER$, $FASTER$, and $SAME$~\ref{fig:speed_membership}, and the significance $SIG$ of each neighboring agent, coded by $HIGH$ and $LOW$~\ref{fig:significance_membership}.
 Using these linguistic variables, the alignment steering function is represented by the following rules:
 \begin{verbatim}
 if (SIG is LOW) or (H is SAME) then H' is SAME,
@@ -117,69 +148,92 @@ if (SIG is HIGH) and (S is FASTER) then S' is FASTER,
 \end{verbatim}
 Our proposal for adding a shepherd is to model it with more or less the same alignment rules but using different weights and membership functions.
 
-\begin{figure}[ht]\centering
-    \subfigure[Heading]{\includegraphics[width=0.3\textwidth]{fig/heading_membership}}
-    \subfigure[Speed]{\includegraphics[width=0.3\textwidth]{fig/speed_membership}}
-    \subfigure[Significance]{\includegraphics[width=0.3\textwidth]{fig/significance_membership}}
-    \caption{Membership functions}
-    \label{membership}
+\begin{figure}[h]
+  \begin{minipage}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/heading_membership}
+    \caption{\label{fig:heading_membership}Heading membership}
+    \label{img_1234}
+  \end{minipage}%
+  \begin{minipage}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/speed_membership}
+    \caption{\label{fig:speed_membership}Speed membership}
+    \label{img_2345}
+  \end{minipage}%
+    \begin{minipage}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/significance_membership}
+    \caption{\label{fig:significance_membership}Significance membership}
+    \label{img_3456}
+  \end{minipage}%
 \end{figure}
 
 The first step in implementing this model is to fuzzify the inputs, i.e., taking the agents' positions and current headings to determine the degree to which they belong to each of the appropriate fuzzy sets via the aforementioned membership functions.
 The next step is to combine the fuzzy inputs according to the proposed rules into a single number, the antecedent. Then, create a new fuzzy set, the consequent, and reshape it using the antecedent.
 Then, finally, all of the rule outputs are aggregated into a single fuzzy set and defuzzified into a single numeric output.
 
-\subsection{OCEAN model}
-To further extend the fuzzy logic model, we use the OCEAN personality model, generally used to describe people, to individualize the agents~\cite{fuzzylogic}. 
-
-As defined in social science and psychology, our personalities shape our thoughts, feelings, and behaviors, distinguishing us from other individuals. Modeling heterogeneous sheep requires considering personalities, as individuals with diverse traits react differently to the same situation. The Five-Factor personality model, known as OCEAN, categorizes personalities into five contributing factors:
-\begin{enumerate}
-  \item \textbf{Openness (O)} reflects the degree of curiosity and creativity, indicating preferences for novelty and variety.
-  \item \textbf{Conscientiousness (C)} describes the level of organization and care exhibited in collective activities
-  \item \textbf{Extraversion (E)} related to the degree of energy, sociability, and outgoingness.
-  \item \textbf{Agreeableness (A)} represents a tendency to exhibit compassion and cooperation rather than suspicion and antagonism towards others.
-  \item \textbf{Neuroticism (N)} indicates the tendency to experience unpleasant emotions easily, such as anger, anxiety, depression, or vulnerability, and is the opposite of emotional stability.
-\end{enumerate}
-Agents are modeled with these traits to achieve more realistic crowd behavior.
-
-\subsection*{Fuzzy Inference Model}
-The first implementation is based on~\cite{bajec2003boids} and does not use an intermediate pathing algorithm. Each sheep has its own personality, and using the position and speed of sheep in a local environment, we use our fuzzy inference system to return a new heading and speed for all sheep. These values are directly used for the movement of the given sheep.\\
-The second implementation is based on~\cite{fuzzylogic} and builds on top of the Str\"{o}mbom algorithm. Instead of directly obtaining the speed and angle of the sheep, we derive new parameters for Str\"{o}mbom from the personality of each individual agent and assign the parameters from defined fuzzy rules, such as:
-\begin{verbatim}    
-if (Extraversion is POS) and (Agreeableness is POS) then k neighbors HIGH
-if (Neuroticism is POS) then added noise is HIGH
-\end{verbatim}
-Each sheep's personality is based on the OCEAN model but excludes the conscientiousness aspect. The inputs of the fuzzy inference system are, in this case, the personality of a sheep and the previous Str\"{o}mbom parameters, and the outputs are the new parameters.  
+% \subsection{OCEAN model}
+% To further extend the fuzzy logic model, we use the OCEAN personality model, generally used to describe people, to individualize the agents~\cite{fuzzylogic}. The Five-Factor personality model categorizes personalities into five contributing factors:
+% \begin{enumerate}
+%   \item \textbf{Openness (O)} reflects the degree of curiosity and creativity, indicating preferences for novelty and variety.
+%   \item \textbf{Conscientiousness (C)} describes the level of organization and care exhibited in collective activities
+%   \item \textbf{Extraversion (E)} related to the degree of energy, sociability, and outgoingness.
+%   \item \textbf{Agreeableness (A)} represents a tendency to exhibit compassion and cooperation rather than suspicion and antagonism towards others.
+%   \item \textbf{Neuroticism (N)} indicates the tendency to experience unpleasant emotions easily, such as anger, anxiety, depression, or vulnerability, and is the opposite of emotional stability.
+% \end{enumerate}
+% In this implementation, rather than directly acquiring the speed and angle of the sheep, we derive new parameters for Str\"{o}mbom from the personality of each individual agent and assign the parameters from defined fuzzy rules, such as:
+% \begin{verbatim}    
+% if (Extraversion is POS) and (Agreeableness is POS) then k neighbors HIGH
+% if (Neuroticism is POS) then added noise is HIGH
+% \end{verbatim}
+% Each sheep's personality is based on the OCEAN model but excludes the conscientiousness and openness aspect. The inputs of the fuzzy inference system are, in this case, the personality of a sheep and the previous Str\"{o}mbom parameters, and the outputs are the new parameters. To prevent our model from returning the same centroids due to the same values of the inputs, we model them by average neighbor sheep distance and average dog distance. Based on the closeness of the dog or sheep we will slightly change personality by 10\% and previous parameters for up to 50\%. With that, we achieve much more distinct outputs. The percentage for personalities is much smaller since we want sheep to keep their personality as close to original as possible. The parameters on the other hand scale the extent of which the personality in the rule will modify the output and keep it consistent with the previous actions the sheep has taken. 
 
 
-\subsection{Genetic algorithm}
-The second focus of the article is making sheep dynamics less scripted but learned. We plan to achieve this by representing the sheep as autonomous agents that utilize a genetic algorithm (GA) to evolve their herding strategies incrementally. 
+%\subsection{Genetic algorithm}
+%The second focus of the article is making sheep dynamics less scripted but learned. We plan to achieve this by representing the sheep as autonomous agents that utilize a genetic algorithm (GA) to evolve their herding strategies incrementally. 
 
-GAs are optimization algorithms inspired by the concept of natural selection. The process starts by generating an initial population of potential solutions. Each solution is assessed using a cost function, and solutions with higher fitness are more likely to be selected for reproduction. The chosen individuals undergo crossover and mutation, eventually replacing the less fit individuals in the population. This cycle repeats for multiple generations, refining the solutions over time.
+%GAs are optimization algorithms inspired by the concept of natural selection. The process starts by generating an initial population of potential solutions. Each solution is assessed using a cost function, and solutions with higher fitness are more likely to be selected for reproduction. The chosen individuals undergo crossover and mutation, eventually replacing the less fit individuals in the population. This cycle repeats for multiple generations, refining the solutions over time.
 
-Regarding collective behavior, we need to modify the traditional GA by adding some changes presented in Thomas Miconi's "A Collective Genetic Algorithm"\cite{miconi2001collective}. Since we can not evaluate a single agent but rather the population as a whole, we randomly select two sheep and separately remove them to evaluate their impact on the whole herd. We then create offspring through crossover and mutation. The less valuable sheep, as determined by their effect on the collective herding fitness, are then replaced by the offspring. The sheep's genotype will be represented as a vector so that we can use it as our sheep's decision model. Currently, the plan is to use a simple three-layer artificial neural network. The input layer will consist of an input vector containing information about distances to other sheep and shepherds, and the output layer will return the angular direction and speed of the sheep's movement. 
+%Regarding collective behavior, we need to modify the traditional GA by adding some changes presented in Thomas Miconi's "A Collective Genetic Algorithm"\cite{miconi2001collective}. Since we can not evaluate a single agent but rather the population as a whole, we randomly select two sheep and separately remove them to evaluate their impact on the whole herd. We then create offspring through crossover and mutation. The less valuable sheep, as determined by their effect on the collective herding fitness, are then replaced by the offspring. The sheep's genotype will be represented as a vector so that we can use it as our sheep's decision model. Currently, the plan is to use a simple three-layer artificial neural network. The input layer will consist of an input vector containing information about distances to other sheep and shepherds, and the output layer will return the angular direction and speed of the sheep's movement. 
 
-The initial suggestion for the cost function is a weighted sum between the time it took for all the sheep to enter the barn and the distances separating them in a herd. The optimization strategy is designed to encourage sheep to form a cohesive pack while simultaneously maximizing their evasiveness. Examples of similar implementations using ANN models can also be observed in simulating the collective behavior of zebrafish~\cite{7496361} and robots~\cite{cazenille2018modelling}, albeit using supervised training of the neural network agent's models instead of genetic algorithms. 
+%The initial suggestion for the cost function is a weighted sum between the time it took for all the sheep to enter the barn and the distances separating them in a herd. The optimization strategy is designed to encourage sheep to form a cohesive pack while simultaneously maximizing their evasiveness. Examples of similar implementations using ANN models can also be observed in simulating the collective behavior of zebrafish~\cite{7496361} and robots~\cite{cazenille2018modelling}, albeit using supervised training of the neural network agent's models instead of genetic algorithms. 
 
 \section*{Results}
-We have extended the FRIsheeping Unity project to include the proposed Fuzzy Logic models, moving away from planned pathing algorithms to mimic the erratic behavior of the sheep herd. The improvement allows for more dynamic and unpredictable collective movements, as each sheep now exhibits individualized responses influenced by unique personality traits.
+We have extended the FRIsheeping Unity project to include the proposed Fuzzy Logic models, moving away from planned pathing algorithms to mimic the erratic behavior of the sheep herd. The improvement allows for more dynamic and unpredictable collective movements, as each sheep now exhibits individualized responses influenced by unique personality traits. The comparison can be seen in Fig.~\ref{img2}. In the first image, the sheep are modeled using Str\"{o}mbom algorithm and, therefore, strive to create a herd using the local center of mass. In our extension of the algorithm, each sheep has a unique personality and should show more individualism. We can notice that more adventurous sheep will sometimes stray further away than non-adventurous ones. The difference is especially noticeable in the last part of the run, where sheep are close together. In that way, small movements will affect the sheep input variability more and give more distinct results. In the middle of the last part of the run, we can see that sheep are closer together. This is due to some of them having lower adventurousness but higher agreeableness and extraversion.
 
-\begin{figure}[H]
+\begin{figure}[h]
+  \begin{minipage}{0.5\textwidth}
     \centering
-    \includegraphics[width=\columnwidth]{fig/strombom2.png}
-    \caption{An example of our setup in Unity environment}
+    \includegraphics[width=0.8\linewidth]{fig/strombom_graph.png}
+    \caption{\label{fig:holA}A run of existing Str\"{o}mbom algorithm.}
+    \label{img1}
+  \end{minipage}%
+  \begin{minipage}{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.8\linewidth]{fig/Stormbom_fuzzy2.png}
+    \caption{\label{fig:holB} A run of Str\"{o}mbom algorithm with fuzzy logic.}
+    \label{img2}
+  \end{minipage}
 \end{figure}
 
+Implementing the standalone fuzzy logic model yields completely different sheep behavior. Since they are not directly attracted to the local center of mass but rather turn in the general direction of their significant neighbors, they will follow a similar trajectory but be more spread out. This is the most noticeable in the last part of the path in Fig.~\ref{fig:fuzz2}. But not having an attraction to a single center of mass, we are faced with the problem of the model looping on itself. Since some sheep run from the shepherd next to the fence, they sometimes attract other sheep into walking with them and get stuck, resulting in a huge group of stuck sheep. In that case, we need to recenter sheep to get them unstuck. Otherwise, the model works above expectations but is still not complex enough to reliably guide the sheep into the barn. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{fig/fuzzy_steering.png}
+  \caption{A run of a fuzzy herding algorithm}
+  \label{fig:fuzz2}
+\end{figure}
 
 \section*{Discussion}
-The two proposed fuzzy logic inference models give us insight into different fuzzy logic applications for simulating herding dynamics. The first approach, stemming from~\cite{bajec2003boids}, embraces simplicity by directly incorporating fuzzy logic into the movement of each sheep. The personalized nature of sheep behavior, dictated by OCEAN personality, allows for a decentralized decision-making process. In contrast, the second implementation, inspired by~\cite{fuzzylogic} and building upon the Str\"{o}mbom algorithm, introduces a layer of complexity by deriving new parameters based on individual personality traits. In both approaches, a fuzzy inference system determines the relationships between personality traits and decision preferences.
-
+The two proposed fuzzy logic inference models give us insight into different fuzzy logic applications for simulating herding dynamics. The first approach, stemming from~\cite{bajec2003boids}, embraces simplicity by directly incorporating fuzzy logic into the movement of each sheep. The personalized nature of sheep behavior, dictated by a personality, allows for a decentralized decision-making process. In contrast, the second implementation, inspired by~\cite{fuzzylogic} and building upon the Str\"{o}mbom algorithm, introduces a layer of complexity by deriving new parameters based on individual personality traits. In both approaches, a fuzzy inference system determines the relationships between personality traits and decision preferences. The pathing algorithm would need additional logic to help the shepherd guide the sheep out of loops. This could be done by refining the sheep repulsion from the fence or introducing additional rules. The algorithm could be further refined to include a better border and neighboring sheep detector. Currently, the detection was only accounted for by angle of vision, but not by occlusion of sheep behind trees or other sheep.
 
 % A variety of simulations and validation experiments are implemented in our developed application. The experimental results show that the proposed model can ...
 
 % In the future, we intend to ...
 
-% \acknow{distribution of labor}
+\acknow{TK implemented the fuzzy logic and helped with the shepherding algorithm, NN wrote the fuzzy logic shepherd algorithm and helped with the code, PK made the slides, worked on the report and helped with debugging, VD helped with the Str\"{o}mbom and OCEAN chapter of the report.}
 \showacknow % Display the acknowledgments section
 
 % If you see unexpected formatting errors, try commenting out this line
