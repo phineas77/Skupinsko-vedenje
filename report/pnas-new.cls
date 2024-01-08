@@ -306,7 +306,8 @@
 \newcommand{\acknow}[1]{\def\@acknow{#1}}
 
 %% default english et al.
-\etal{et al.}
+% \etal{et al.}
+\etal{}
 
 %% Dropped capital for first letter of main text
 \newcommand{\dropcap}[1]{\lettrine[lines=2,lraise=0.05,findent=0.1em, nindent=0em]{{\dropcapfont{#1}}}{}}
